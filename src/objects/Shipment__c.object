@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>A package or freight.</description>
+    <enableActivities>false</enableActivities>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <fields>
+        <fullName>ContactEmail__c</fullName>
+        <description>The primary contact for the shipment.</description>
+        <externalId>false</externalId>
+        <label>Contact Email</label>
+        <required>true</required>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact_Phone__c</fullName>
+        <description>Phone number for primary contact.</description>
+        <externalId>false</externalId>
+        <label>Contact Phone</label>
+        <required>true</required>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Insurance__c</fullName>
+        <description>How much the shipment is insured for.</description>
+        <externalId>false</externalId>
+        <label>Insurance</label>
+        <precision>5</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>OverWeight__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>All shipments are charged standard freight for under 500 pounds. A special rule applies for calculating freight by percentage over the &quot;free&quot; limit.</description>
+        <externalId>false</externalId>
+        <label>Over Weight Limit</label>
+        <precision>3</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Rush__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Optional field for rush shipping.</description>
+        <externalId>false</externalId>
+        <label>Rush Order</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Scheduled_Delivery__c</fullName>
+        <description>Date the delivery is scheduled for.</description>
+        <externalId>false</externalId>
+        <label>Scheduled Delivery</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <description>The lifecycle of a shipment.</description>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Processing</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Charged</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Packaging</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Ready for Pickup</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Shipped</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Delivered</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>TrackingExtId__c</fullName>
+        <description>External ID for carrier tracking number. References an outside system.</description>
+        <externalId>true</externalId>
+        <label>Carrier Tracking Number</label>
+        <length>22</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Tracking_URL__c</fullName>
+        <description>Link to a tracking page.</description>
+        <externalId>false</externalId>
+        <label>Tracking URL</label>
+        <required>false</required>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Warnings__c</fullName>
+        <externalId>false</externalId>
+        <label>Warnings</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Fragile</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Hazardous</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Overweight</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <type>MultiselectPicklist</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Weight__c</fullName>
+        <description>Weight in pounds</description>
+        <externalId>false</externalId>
+        <label>Weight</label>
+        <precision>7</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <label>Shipment</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>PKG-{000000}</displayFormat>
+        <label>Tracking Number</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Shipments</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>MaxInsurance</fullName>
+        <active>true</active>
+        <description>The maximum value a package can be insured for.</description>
+        <errorConditionFormula>Insurance__c  &lt; 50000</errorConditionFormula>
+        <errorDisplayField>Insurance__c</errorDisplayField>
+        <errorMessage>No shipment can be insured for over $50,000.</errorMessage>
+    </validationRules>
+</CustomObject>

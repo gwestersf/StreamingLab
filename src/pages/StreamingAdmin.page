@@ -1,0 +1,43 @@
+<apex:page controller="PushTopicController" sidebar="false">
+<apex:form >
+
+  <apex:pageBlock title="Push Topic Administraton" mode="edit">
+    <apex:pageBlockButtons >
+      <apex:commandButton action="{!save}" value="Save"/>
+    </apex:pageBlockButtons>
+    <apex:pageBlockSection title="Create a new push topic" columns="2">
+      <apex:inputField value="{!newpushtopic.name}" required="false"/>
+      <apex:inputTextarea cols="150" rows="5" required="true"  value="{!newpushtopic.query}"/>
+    </apex:pageBlockSection>
+  </apex:pageBlock>
+  <apex:pageBlock title="Push Topic Inventory" mode="edit">
+      <apex:pageBlockTable value="{!activepushtopics}" var="pushtopic" style="width:100%" columns="6" >
+        <apex:column style="width:20px">
+           <apex:commandLink action="{!deleteTopic}" value="Delete">
+           <apex:param name="header" value="{!pushtopic.id}" assignTo="{!deleteTopicId}"/>
+        </apex:commandLink>
+      </apex:column>
+      <apex:column style="width:20px">
+        <apex:outputText value="{!pushtopic.id}"/>
+        <apex:facet name="header">Id</apex:facet>
+      </apex:column>
+      <apex:column style="width:20px">
+        <apex:outputText value="{!pushtopic.name}"/>
+        <apex:facet name="header">Name</apex:facet>
+      </apex:column>
+      <apex:column style="width:200px">
+        <apex:outputText value="{!pushtopic.query}"/>
+        <apex:facet name="header">Query</apex:facet>
+      </apex:column>
+      <apex:column style="width:20px">
+        <apex:outputText value="{!pushtopic.apiversion}"/>
+        <apex:facet name="header">API Version</apex:facet>
+      </apex:column>
+      <apex:column style="width:20px">
+        <apex:outputText value="{!pushtopic.isactive}"/>
+        <apex:facet name="header">Activated</apex:facet>
+      </apex:column>
+      </apex:pageBlockTable>
+  </apex:pageBlock>
+</apex:form>
+</apex:page>

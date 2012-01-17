@@ -4,6 +4,7 @@
     <apiAccessLevel>Unrestricted</apiAccessLevel>
     <namespacePrefix>gwestr</namespacePrefix>
     <types>
+        <members>EnsurePushTopicExistsTriggerTest</members>
         <members>PushTopicController</members>
         <name>ApexClass</name>
     </types>
@@ -12,6 +13,10 @@
         <members>StreamingWithDojo</members>
         <members>StreamingWithJquery</members>
         <name>ApexPage</name>
+    </types>
+    <types>
+        <members>EnsurePushTopicExists</members>
+        <name>ApexTrigger</name>
     </types>
     <types>
         <members>Streaming_Labs</members>
@@ -51,8 +56,9 @@
         <name>ListView</name>
     </types>
     <types>
-        <members>cometd_js</members>
         <members>common_cometd_js</members>
+        <members>dojo_cometd_js</members>
+        <members>jquery_cometd_js</members>
         <members>json2_js</members>
         <name>StaticResource</name>
     </types>

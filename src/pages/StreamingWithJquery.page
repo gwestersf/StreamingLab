@@ -1,6 +1,24 @@
 <apex:page >
-  <!-- Begin Default Content REMOVE THIS -->
-  <h1>Congratulations</h1>
-  This is your new Page
-  <!-- End Default Content REMOVE THIS -->
+    <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"/>
+    <apex:includeScript value="{!$Resource.common_cometd_js}"/>
+    <apex:includeScript value="{!$Resource.jquery_cometd_js}"/>
+  
+    <script type="text/javascript">
+        $ = jQuery.noConflict();
+        $(document).ready(function() {
+        
+            var cometdUrl = 'https://' + window.location.hostname + '/cometd/23.0/';
+            var auth = 'OAuth {!$Api.Session_ID}';
+
+            $.cometd.init({
+                url: cometdUrl,
+                requestHeaders: {Authorization: auth}
+            });
+
+            $.cometd.subscribe('/topic/shipment', function(message) {
+            
+            });
+        });
+    </script>
+  
 </apex:page>

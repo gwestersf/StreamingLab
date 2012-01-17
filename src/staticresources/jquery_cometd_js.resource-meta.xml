@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StaticResource xmlns="http://soap.sforce.com/2006/04/metadata">
+    <cacheControl>Public</cacheControl>
+    <contentType>text/javascript</contentType>
+    <description>The jquery libary for cometd.
+
+http://download.cometd.org/cometd-2.0.0-distribution.tar.gz 
+
+Get cometd-javascript/jquery/src/main/webapp/jquery/jquery.cometd.js</description>
+</StaticResource>

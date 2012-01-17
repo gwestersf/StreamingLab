@@ -195,7 +195,7 @@
         <fullName>MaxInsurance</fullName>
         <active>true</active>
         <description>The maximum value a package can be insured for.</description>
-        <errorConditionFormula>Insurance__c  &lt; 50000</errorConditionFormula>
+        <errorConditionFormula>Insurance__c  &gt; 50000</errorConditionFormula>
         <errorDisplayField>Insurance__c</errorDisplayField>
         <errorMessage>No shipment can be insured for over $50,000.</errorMessage>
     </validationRules>

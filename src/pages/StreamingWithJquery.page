@@ -1,4 +1,4 @@
-<apex:page standardController="Shipment__c" recordSetVar="shipments">
+<apex:page standardController="Shipment__c" recordSetVar="shipments" sidebar="false">
     <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"/>
     <apex:includeScript value="{!$Resource.common_cometd_js}"/>
     <apex:includeScript value="{!$Resource.jquery_cometd_js}"/>
@@ -36,43 +36,35 @@
             function _handleMessage(message) {
                 var $container = $('#containership');   
                 
-                var outdated = document.getElementById('shipment ' + message.data.sobject.id);
+                var text = '<div class=\'shipment ' + message.data.sobject.Id + '\'>' +
+                'Ship to: ' + message.data.sobject.gwestr__Zip__c +
+                '<br/>Tracking number ' + message.data.sobject.gwestr__TrackingExtId__c +
+                '<br/>Status ' + message.data.sobject.gwestr__Status__c +
+                '<br/>Due ' + message.data.sobject.gwestr__Scheduled_Delivery__c +
+                '<br/>Insured for ' + message.data.sobject.gwestr__Insurance__c +
+                '<br/>Rush order ' + message.data.sobject.gwestr__Rush__c +
+                '<br/>Weight ' + message.data.sobject.gwestr__Weight__c +
+                '<br/>Phone ' + message.data.sobject.gwestr__Contact_Phone__c +
+                '<br/>Email ' + message.data.sobject.gwestr__ContactEmail__c +
+                '</div>';
                 
-                var box = document.createElement('div');
-                box.appendChild(document.createTextNode('New!'));
-                box.appendChild(document.createElement('br'));
-                box.appendChild(document.createTextNode('Ship to: ' + message.data.sobject.gwestr__Zip__c));
-                box.appendChild(document.createElement('br'));
-                box.appendChild(document.createTextNode('Tracking number ' + message.data.sobject.gwestr__TrackingExtId__c));
-                box.appendChild(document.createElement('br'));
-                box.appendChild(document.createTextNode('Status ' + message.data.sobject.gwestr__Status__c));
-                box.appendChild(document.createElement('br'));
-                box.appendChild(document.createTextNode('Due ' + message.data.sobject.gwestr__Scheduled_Delivery__c));
-                box.appendChild(document.createElement('br'));
-                box.appendChild(document.createTextNode('Insured for ' + message.data.sobject.gwestr__Insurance__c));
-                box.appendChild(document.createElement('br'));
-                box.appendChild(document.createTextNode('Rush order ' + message.data.sobject.gwestr__Rush__c));
-                box.appendChild(document.createElement('br'));
-                box.appendChild(document.createTextNode('Weight ' + message.data.sobject.gwestr__Weight__c));
-                box.appendChild(document.createElement('br'));
-                box.appendChild(document.createTextNode('Phone ' + message.data.sobject.gwestr__Contact_Phone__c));
-                box.appendChild(document.createElement('br'));
-                box.appendChild(document.createTextNode('Email ' + message.data.sobject.gwestr__ContactEmail__c));
-                box.appendChild(document.createElement('br'));
-                
-                box.className = 'shipment ' + message.data.sobject.Id;
-                $container.append( box );
-                $container.masonry( 'appended' , box);
+                $container.prepend(text);
+                $container.masonry('reload');
             }
             
-            function _metaConnect(message) {
+            function _metaResubscribe(message) {
                 if(message.successful == false) {
-                     $.cometd.subscribe('/topic/shipment', this, _handleMessage);
+                    $.cometd.init({
+                        url: 'https://' + window.location.hostname + '/cometd/24.0/',
+                        requestHeaders: {Authorization: 'OAuth {!$Api.Session_ID}'}
+                    });
+                          
+                    $.cometd.subscribe('/topic/shipment', this, _handleMessage);
                 }
             }
             
-            
-            $.cometd.addListener('/meta/connect', this, _metaConnect);
+            $.cometd.addListener('/meta/connect', this, _metaResubscribe);
+            $.cometd.addListener('/meta/subscribe', this, _metaResubscribe);
 
             $.cometd.init({
                 url: 'https://' + window.location.hostname + '/cometd/24.0/',

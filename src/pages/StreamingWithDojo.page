@@ -4,8 +4,12 @@
     <apex:includeScript value="{!$Resource.dojo_cometd_js}"/>
 
     <script type="text/javascript">
-        dojo.require("dojox.cometd");
-        dojo.require("dijit.ProgressBar");
+        dojo.require("dojox.cometd");       
+        dojo.require("dojox.grid.EnhancedGrid");
+        dojo.require("dojox.grid.enhanced.plugins.DnD");
+        dojo.require("dojox.grid.enhanced.plugins.Menu");
+        dojo.require("dojox.grid.enhanced.plugins.NestedSorting"); 
+        dojo.require("dojox.grid.enhanced.plugins.IndirectSelection");
         
         dojo.addOnLoad(function()
         {
@@ -71,19 +75,28 @@
             cometd.subscribe('/topic/shipment', _metaSubscribe);
             cometd.addListener('/meta/connect', _metaConnect);
         });
+        
     </script>  
+    <script type="text/javascript">
+        dojo.ready(function () {
+    
+            var grid = new dojox.grid.EnhancedGrid({
+                plugins : {nestedSorting: true, dnd: true, indirectSelection: true,
+                    menus: {headerMenu:"headerMenuId", rowMenu:"rowMenuId", cellMenu:"cellMenuId",selectedRegionMenu:"selectedRegionMenuId"}
+                }
+            }, dojo.byId('gridDiv'));
+            grid.startup();
+        });
+    </script>
 
-    <div id='containership'>
-      <apex:repeat value="{!shipments}" var="s"> <!-- Loop through list of account Ids -->  
-      <div class='shipment {!s.id}'>
-        <p>Ship to: {!s.gwestr__Zip__c}<br/>
-        Tracking number: {!s.gwestr__TrackingExtId__c}<br/>
-        Status: {!s.gwestr__Status__c}<br/>
-        <div data-dojo-type="dijit.ProgressBar" style="width:800px" 
-          data-dojo-id="jsProgress{!s.id}" id="downloadProgress{!s.id}" 
-            data-dojo-props="maximum:5" onload="jsProgress{!s.id}.update({ progress:1 })"></div>
-        </p>
-      </div>
-      </apex:repeat>
+    <div id='gridDiv'>
+        <div id="headerMenuId">
+            <div id="cellMenuId">Ship to</div>
+        </div>
+        <apex:repeat value="{!shipments}" var="s"> 
+          <div id="rowMenuId" class='shipment {!s.id}'>
+            <div id="cellMenuId">{!s.gwestr__Zip__c}</div>
+          </div>
+        </apex:repeat>
     </div>
 </apex:page>

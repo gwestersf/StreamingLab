@@ -70,5 +70,5 @@
         <members>Shipment__c.MaxInsurance</members>
         <name>ValidationRule</name>
     </types>
-    <version>19.0</version>
+    <version>24.0</version>
 </Package>

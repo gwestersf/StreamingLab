@@ -7,19 +7,19 @@ public with sharing class PushTopicController {
     
     public PushTopicController() {
         newPushTopic = new PushTopic();
-        activePushTopics = [SELECT id, name, query, apiversion, isactive FROM PushTopic WHERE isactive=true];
-        inactivePushTopics = [SELECT id, name, query, apiversion, isactive FROM PushTopic WHERE isactive=false];
+        activePushTopics = [SELECT id, name, query, apiversion, isactive, notifyForFields, notifyForOperations FROM PushTopic WHERE isactive=true];
+        inactivePushTopics = [SELECT id, name, query, apiversion, isactive, notifyForFields, notifyForOperations FROM PushTopic WHERE isactive=false];
     }
 
     public PageReference save() {
-        newPushTopic.apiversion = 23.0;
+        newPushTopic.apiversion = 24.0;
         newPushTopic.isactive = true;
         insert newPushTopic;
         return null;
     }
     
     public PageReference deleteTopic() {
-        PushTopic deleteTopic = [SELECT id FROM PushTopic WHERE id = :deleteTopicId];
+        List<PushTopic> deleteTopic = [SELECT id FROM PushTopic WHERE id = :deleteTopicId];
         delete deleteTopic;
         return null;
     }

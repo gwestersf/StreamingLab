@@ -34,16 +34,23 @@
     </actionOverrides>
     <deploymentStatus>Deployed</deploymentStatus>
     <description>A package or freight.</description>
+    <enableActivities>false</enableActivities>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
     <fields>
         <fullName>ContactEmail__c</fullName>
         <description>The primary contact for the shipment.</description>
+        <externalId>false</externalId>
         <label>Contact Email</label>
         <required>true</required>
         <type>Email</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Contact_Phone__c</fullName>
         <description>Phone number for primary contact.</description>
+        <externalId>false</externalId>
         <label>Contact Phone</label>
         <required>true</required>
         <type>Phone</type>
@@ -51,6 +58,7 @@
     <fields>
         <fullName>Insurance__c</fullName>
         <description>How much the shipment is insured for.</description>
+        <externalId>false</externalId>
         <label>Insurance</label>
         <precision>5</precision>
         <required>true</required>
@@ -61,6 +69,7 @@
         <fullName>OverWeight__c</fullName>
         <defaultValue>0</defaultValue>
         <description>All shipments are charged standard freight for under 500 pounds. A special rule applies for calculating freight by percentage over the &quot;free&quot; limit.</description>
+        <externalId>false</externalId>
         <label>Over Weight Limit</label>
         <precision>3</precision>
         <required>true</required>
@@ -71,18 +80,22 @@
         <fullName>Rush__c</fullName>
         <defaultValue>false</defaultValue>
         <description>Optional field for rush shipping.</description>
+        <externalId>false</externalId>
         <label>Rush Order</label>
         <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Scheduled_Delivery__c</fullName>
         <description>Date the delivery is scheduled for.</description>
+        <externalId>false</externalId>
         <label>Scheduled Delivery</label>
+        <required>false</required>
         <type>Date</type>
     </fields>
     <fields>
         <fullName>Status__c</fullName>
         <description>The lifecycle of a shipment.</description>
+        <externalId>false</externalId>
         <label>Status</label>
         <picklist>
             <picklistValues>
@@ -119,16 +132,21 @@
         <externalId>true</externalId>
         <label>Carrier Tracking Number</label>
         <length>22</length>
+        <required>false</required>
         <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Tracking_URL__c</fullName>
         <description>Link to a tracking page.</description>
+        <externalId>false</externalId>
         <label>Tracking URL</label>
+        <required>false</required>
         <type>Url</type>
     </fields>
     <fields>
         <fullName>Warnings__c</fullName>
+        <externalId>false</externalId>
         <label>Warnings</label>
         <picklist>
             <picklistValues>
@@ -151,16 +169,22 @@
     <fields>
         <fullName>Weight__c</fullName>
         <description>Weight in pounds</description>
+        <externalId>false</externalId>
         <label>Weight</label>
         <precision>7</precision>
+        <required>false</required>
         <scale>2</scale>
         <type>Number</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Zip__c</fullName>
+        <externalId>false</externalId>
         <label>Zip</label>
         <length>10</length>
+        <required>false</required>
         <type>Text</type>
+        <unique>false</unique>
     </fields>
     <label>Shipment</label>
     <listViews>

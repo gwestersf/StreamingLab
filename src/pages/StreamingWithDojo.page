@@ -1,26 +1,24 @@
-<apex:page >
+<apex:page standardController="Shipment__c" recordSetVar="shipments">
     <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/dojo/1.4.3/dojo/dojo.xd.js"/>
     <apex:includeScript value="{!$Resource.common_cometd_js}"/>
     <apex:includeScript value="{!$Resource.dojo_cometd_js}"/>
 
     <script type="text/javascript">
         dojo.require("dojox.cometd");
+        dojo.require("dijit.ProgressBar");
         
         dojo.addOnLoad(function()
         {
             var _connected = false;
         
-            function _connectionSucceeded()
-            {
+            function _connectionSucceeded() {
             }
         
-            function _connectionBroken()
-            {
+            function _connectionBroken() {
                 dojo.byId('body').innerHTML = 'CometD Connection Broken';
             }
             
-            function _metaSubscribe(message)
-            {
+            function _metaSubscribe(message) {
                 var insurance = message.data.sobject.gwestr__Insurance__c;
                 var rush = message.data.sobject.gwestr__Rush__c;
                 var delivery = message.data.sobject.gwestr__Scheduled_Delivery__c;
@@ -45,8 +43,7 @@
                 }
             }
         
-            function _metaConnect(message)
-            {
+            function _metaConnect(message) {
                 var wasConnected = _connected;
                 _connected = message.successful === true;
                 if (!wasConnected && _connected)
@@ -62,16 +59,13 @@
             var cometd = dojox.cometd;
         
             // Disconnect when the page unloads
-            dojo.addOnUnload(function()
-            {
+            dojo.addOnUnload(function() {
                 cometd.disconnect();
             });
         
-            var auth = 'OAuth {!$Api.Session_ID}';
-            var cometUrl = 'https://' + window.location.hostname + '/cometd/23.0/';
             cometd.init({
-                url: cometUrl,
-                requestHeaders: {Authorization: auth}
+                url: 'https://' + window.location.hostname + '/cometd/24.0/',
+                requestHeaders: {Authorization: 'OAuth {!$Api.Session_ID}'}
             });
             
             cometd.subscribe('/topic/shipment', _metaSubscribe);
@@ -79,4 +73,17 @@
         });
     </script>  
 
+    <div id='containership'>
+      <apex:repeat value="{!shipments}" var="s"> <!-- Loop through list of account Ids -->  
+      <div class='shipment {!s.id}'>
+        <p>Ship to: {!s.gwestr__Zip__c}<br/>
+        Tracking number: {!s.gwestr__TrackingExtId__c}<br/>
+        Status: {!s.gwestr__Status__c}<br/>
+        <div data-dojo-type="dijit.ProgressBar" style="width:800px" 
+          data-dojo-id="jsProgress{!s.id}" id="downloadProgress{!s.id}" 
+            data-dojo-props="maximum:5" onload="jsProgress{!s.id}.update({ progress:1 })"></div>
+        </p>
+      </div>
+      </apex:repeat>
+    </div>
 </apex:page>

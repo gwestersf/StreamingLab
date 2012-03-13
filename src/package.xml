@@ -34,6 +34,7 @@
         <members>Shipment__c.Tracking_URL__c</members>
         <members>Shipment__c.Warnings__c</members>
         <members>Shipment__c.Weight__c</members>
+        <members>Shipment__c.Zip__c</members>
         <name>CustomField</name>
     </types>
     <types>
@@ -59,12 +60,15 @@
         <members>common_cometd_js</members>
         <members>dojo_cometd_js</members>
         <members>jquery_cometd_js</members>
+        <members>jquery_infinite_scroll</members>
         <members>json2_js</members>
+        <members>masonry_2_1_03</members>
+        <members>modernizr</members>
         <name>StaticResource</name>
     </types>
     <types>
         <members>Shipment__c.MaxInsurance</members>
         <name>ValidationRule</name>
     </types>
-    <version>23.0</version>
+    <version>19.0</version>
 </Package>
